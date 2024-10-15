@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTypes", "..\ChatProfili
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHandling", "..\FileHandling\FileHandling.csproj", "{287C5AB7-AD82-4E28-8D09-14FB8DE1DB15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTypesTests", "..\DataTypesTests\DataTypesTests.csproj", "{4BB4D813-BDE6-458D-9DAD-22C7579FB7BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{287C5AB7-AD82-4E28-8D09-14FB8DE1DB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{287C5AB7-AD82-4E28-8D09-14FB8DE1DB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{287C5AB7-AD82-4E28-8D09-14FB8DE1DB15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB4D813-BDE6-458D-9DAD-22C7579FB7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB4D813-BDE6-458D-9DAD-22C7579FB7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB4D813-BDE6-458D-9DAD-22C7579FB7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB4D813-BDE6-458D-9DAD-22C7579FB7BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
