@@ -1,4 +1,4 @@
-﻿using DataTypes.ChatProfiling;
+using DataTypes.ChatProfiling;
 using FileHandling;
 
 namespace TimedMessagesResponseTimeAnalyser;
@@ -18,7 +18,7 @@ internal class Program
         var rawMessages = FileReader.ReadAllFromPath(inputPath);
         var profiler = new WhatsAppProfiler();
 
-        var chatItems = profiler.GenerateFromPlainlines(rawMessages);
+        var chatItems = profiler.GenerateFromPlainLines(rawMessages);
 
         // todo: chat processing 
 

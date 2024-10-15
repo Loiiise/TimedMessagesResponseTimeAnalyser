@@ -1,7 +1,7 @@
 ﻿namespace DataTypes.ChatProfiling;
 public class WhatsAppProfiler : IChatProfiler
 {
-    public IEnumerable<ChatItem> GenerateFromPlainlines(string[] lines)
+    public IEnumerable<ChatItem> GenerateFromPlainLines(string[] lines)
     {
         throw new NotImplementedException();
     }
