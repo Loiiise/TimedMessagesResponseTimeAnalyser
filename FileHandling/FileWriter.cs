@@ -1,8 +1,8 @@
 ﻿namespace FileHandling;
 public class FileWriter
 {
-    public static void WriteAllToPath(string path, string[] lines)
+    public static void WriteAllToPath(string path, string text)
     {
-        File.WriteAllLines(path, lines);
+        File.WriteAllText(path, text);
     }
 }

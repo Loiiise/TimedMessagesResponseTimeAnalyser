@@ -1,4 +1,5 @@
-﻿using DataTypes.ChatProfiling;
+using Analyse;
+using DataTypes.ChatProfiling;
 using FileHandling;
 
 namespace TimedMessagesResponseTimeAnalyser;
@@ -7,19 +8,23 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        string inputPath = args.Any() ? args[0] : GetStringFromUser("What is the path of the file you want to analyse?");
+        var amountOfArgs = args.Length;
 
-        var sender = GetStringFromUser("What is the name of the sender? (as used in the chat file)");
-        var receiver = GetStringFromUser("What is the name of the receiver? (as used in the chat file)");
+        var inputPath = args.Length > 0 ? args[0] : GetStringFromUser("What is the path of the file you want to analyse?");
+
+        var sender = args.Length > 1 ? args[1] : GetStringFromUser("What is the name of the sender? (as used in the chat file)");
+        var receiver = args.Length > 2 ? args[2] : GetStringFromUser("What is the name of the receiver? (as used in the chat file)");
 
         var rawMessages = FileReader.ReadAllFromPath(inputPath);
         var profiler = new WhatsAppProfiler(sender, receiver);
 
         var chatItems = profiler.GenerateFromPlainLines(rawMessages);
 
-        // todo: chat processing 
+        var analyser = new BasicAnalyser();
+        var report = analyser.GenerateReport(chatItems);
 
-        // todo: output
+        var outputPath = $"{Path.GetFileNameWithoutExtension(inputPath)}Report.{Path.GetExtension(inputPath)}";
+        FileWriter.WriteAllToPath(outputPath, report);
     }
 
     private static string GetStringFromUser(string message)
