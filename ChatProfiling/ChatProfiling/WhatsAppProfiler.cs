@@ -9,7 +9,13 @@ public class WhatsAppProfiler : IChatProfiler
         _nameReceiver = nameReceiver;
     }
 
-    public IEnumerable<ChatItem> GenerateFromPlainLines(string[] lines) => lines.Select(GenerateFromPlainLine).Where(l => l != null).Select(l => l!);
+    public IEnumerable<ChatItem> GenerateFromPlainLines(string[] lines) 
+        => lines
+            .Select(GenerateFromPlainLine)
+            .Where(l => l != null)
+            .Select(l => l!)
+            .Where(l => l.Person != Person.None);
+
     public ChatItem? GenerateFromPlainLine(string line)
     {
         // This is so ugly, why is WhatsApp's format like this?
@@ -23,7 +29,6 @@ public class WhatsAppProfiler : IChatProfiler
 
         var dateTimeString = dateTimeAndOtherData[0];
         var personString = personAndMessage[0];
-
 
         if (PersonExtensions.TryParsePerson(personString, _nameSender, _nameReceiver, out var person) &&
             DateTime.TryParse(dateTimeString, DateTimeFormatInfo.InvariantInfo, out var timeStamp))

@@ -20,7 +20,7 @@ internal class Program
 
         var chatItems = profiler.GenerateFromPlainLines(rawMessages);
 
-        var analyser = new BasicAnalyser();
+        var analyser = new BasicAnalyser(sender, receiver);
         var report = analyser.GenerateReport(chatItems);
 
         var outputPath = Path.ChangeExtension(inputPath, _resultExtension + ".txt");
