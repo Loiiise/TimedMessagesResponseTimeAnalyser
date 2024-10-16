@@ -9,21 +9,33 @@ public class WhatsAppProfiler : IChatProfiler
         _nameReceiver = nameReceiver;
     }
 
-    public IEnumerable<ChatItem> GenerateFromPlainLines(string[] lines) => lines.Select(GenerateFromPlainLine);
-    public ChatItem GenerateFromPlainLine(string line)
+    public IEnumerable<ChatItem> GenerateFromPlainLines(string[] lines) => lines.Select(GenerateFromPlainLine).Where(l => l != null).Select(l => l!);
+    public ChatItem? GenerateFromPlainLine(string line)
     {
         // This is so ugly, why is WhatsApp's format like this?
         var dateTimeAndOtherData = line.Split(" - ");
-        var personAndMessage = dateTimeAndOtherData[1].Split(":");
+        if (dateTimeAndOtherData.Length < 2)
+        {
+            return null;
+        }
+
+        var personAndMessage = dateTimeAndOtherData[1].Split(": ");
 
         var dateTimeString = dateTimeAndOtherData[0];
         var personString = personAndMessage[0];
 
-        return new ChatItem
+
+        if (PersonExtensions.TryParsePerson(personString, _nameSender, _nameReceiver, out var person) &&
+            DateTime.TryParse(dateTimeString, DateTimeFormatInfo.InvariantInfo, out var timeStamp))
         {
-            Person = PersonExtensions.ParsePerson(personString, _nameSender, _nameReceiver),
-            TimeStamp = DateTime.Parse(dateTimeString, DateTimeFormatInfo.InvariantInfo),
-        };
+            return new ChatItem
+            {
+                Person = person,
+                TimeStamp = timeStamp,
+            };
+        }
+
+        return null;
     }
 
     private readonly string _nameSender;

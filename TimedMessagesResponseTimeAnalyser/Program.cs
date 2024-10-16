@@ -23,7 +23,7 @@ internal class Program
         var analyser = new BasicAnalyser();
         var report = analyser.GenerateReport(chatItems);
 
-        var outputPath = $"{Path.GetFileNameWithoutExtension(inputPath)}Report.{Path.GetExtension(inputPath)}";
+        var outputPath = Path.ChangeExtension(inputPath, _resultExtension + ".txt");
         FileWriter.WriteAllToPath(outputPath, report);
     }
 
@@ -32,4 +32,6 @@ internal class Program
         Console.WriteLine(message);
         return Console.ReadLine()!;
     }
+
+    private const string _resultExtension = "TMRTA";
 }
