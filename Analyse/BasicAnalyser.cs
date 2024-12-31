@@ -5,15 +5,11 @@ namespace Analyse;
 /// <summary>
 /// This analyser is very naive. It doesn't consider any breaks but assumes a constant flow of conversation.
 /// </summary>
-public class BasicAnalyser : IAnalyser
+public class BasicAnalyser : Analyser
 {
-    public BasicAnalyser(string sendingPersonName, string receivingPersonName)
-    {
-        _sendingPersonName = sendingPersonName;
-        _receivingPersonName = receivingPersonName;
-    }
+    public BasicAnalyser(string sendingPersonName, string receivingPersonName) : base(sendingPersonName, receivingPersonName) { }
 
-    public string GenerateReport(IEnumerable<ChatItem> conversation)
+    public override string GenerateReport(IEnumerable<ChatItem> conversation)
     {
         var firstItem = conversation.First();
         var currentPerson = firstItem.Person;
@@ -50,7 +46,4 @@ public class BasicAnalyser : IAnalyser
             {_receivingPersonName}: {receivingPersonTotalResponseTime / receivingPersonOccurrences}
             """;
     }
-
-    private readonly string _sendingPersonName;
-    private readonly string _receivingPersonName;
 }
